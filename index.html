@@ -35,6 +35,10 @@ p{margin:0;max-width:62ch}
 .proj{background:var(--surface);border:1px dashed var(--line);border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:8px;min-width:0}
 .proj b{font-weight:600}
 .proj small{color:var(--muted);font-size:14px}
+.proj.done{border-style:solid;border-color:var(--accent);color:var(--fg);text-decoration:none}
+.proj.done b{color:var(--accent)}
+.proj.done:hover{background:var(--line)}
+.proj.done:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .log{list-style:none;margin:0;padding:0;border-left:1px solid var(--line)}
 .log li{position:relative;padding:0 0 22px 22px}
 .log li::before{content:"";position:absolute;left:-5px;top:8px;width:9px;height:9px;border-radius:50%;background:var(--bg);border:2px solid var(--muted)}
@@ -54,7 +58,7 @@ footer{font-family:var(--mono);font-size:12px;color:var(--muted)}
 
 <div class="wrap">
   <header>
-    <span class="ver"><span class="dot"></span>v0.1.0 · в разработке</span>
+    <span class="ver"><span class="dot"></span>v0.2.0 · в разработке</span>
     <span class="tag" style="display:block;margin-top:18px">@moraxx</span>
     <h1 style="margin-top:6px">Мансур.<br><em>Строю</em> продукты с ИИ.</h1>
     <p class="lead">Вайбовый айтишник. Делаю штуки, которыми пользуются люди. <span>Пока только начинаю, и это лог того, как я расту.</span></p>
@@ -72,16 +76,17 @@ footer{font-family:var(--mono);font-size:12px;color:var(--muted)}
       <span class="chip on">LLM API</span>
       <span class="chip">HTML / CSS</span>
       <span class="chip">JavaScript</span>
-      <span class="chip">Telegram-боты</span>
+      <span class="chip on">Telegram-боты</span>
+      <span class="chip">SQLite</span>
       <span class="chip">Git</span>
     </div>
   </section>
 
   <section>
-    <h2>Проекты <span class="tag">0 из 3 · слоты открыты</span></h2>
+    <h2>Проекты <span class="tag">1 из 3 · слоты открыты</span></h2>
     <div class="projects">
       <div class="proj"><span class="tag">слот 1</span><b>Эта страница</b><small>Первый шаг. Собрана за 15 минут.</small></div>
-      <div class="proj"><span class="tag">слот 2</span><b>Бот для записи клиентов</b><small>Демо для портфолио. Скоро.</small></div>
+      <a class="proj done" href="https://github.com/moraxxvi/barber-bot" target="_blank" rel="noopener"><span class="tag">проект 01 · python</span><b>Barber Bot ↗</b><small>Telegram-бот для записи в барбершоп: услуги, свободное время, номер в один тап, уведомления владельцу. aiogram, SQLite.</small></a>
       <div class="proj"><span class="tag">слот 3</span><b>Учебный проект</b><small>Скоро здесь.</small></div>
     </div>
   </section>
@@ -89,8 +94,8 @@ footer{font-family:var(--mono);font-size:12px;color:var(--muted)}
   <section>
     <h2>Changelog <span class="tag">история версий</span></h2>
     <ol class="log">
-      <li class="now"><span class="v">v0.1.0</span><span class="d">17.10.2026</span><p>Запустил свою первую страницу.</p></li>
-      <li><span class="v">v0.2.0</span><span class="d">скоро</span><p>Первый проект в портфолио.</p></li>
+      <li class="now"><span class="v">v0.2.0</span><span class="d">21.10.2026</span><p>Первый проект: Telegram-бот для записи клиентов.</p></li>
+      <li><span class="v">v0.1.0</span><span class="d">17.10.2026</span><p>Запустил свою первую страницу.</p></li>
       <li><span class="v">v1.0.0</span><span class="d">2027</span><p>Первые коммерческие проекты.</p></li>
     </ol>
   </section>
@@ -103,6 +108,6 @@ footer{font-family:var(--mono);font-size:12px;color:var(--muted)}
     </div>
   </section>
 
-  <footer>build 001 · сделано вместе с Claude</footer>
+  <footer>build 002 · сделано вместе с Claude</footer>
 </div>
 </body></html>
