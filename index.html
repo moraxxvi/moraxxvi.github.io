@@ -34,6 +34,10 @@ p{margin:0;max-width:62ch}
 .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
 .proj{background:var(--surface);border:1px dashed var(--line);border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:8px;min-width:0}
 .proj b{font-weight:600}
+.proj .shot.chat{display:flex;flex-direction:column;justify-content:center;gap:6px;padding:14px;background:#0e1621;aspect-ratio:16/10;border-radius:6px;border:1px solid var(--line);margin-bottom:4px;overflow:hidden}
+.bub{max-width:80%;padding:6px 10px;border-radius:12px;font-size:12px;line-height:1.3}
+.bub.in{align-self:flex-end;background:#2b5278;color:#fff;border-bottom-right-radius:4px}
+.bub.out{align-self:flex-start;background:#182533;color:#e9e6df;border-bottom-left-radius:4px}
 .proj small{color:var(--muted);font-size:14px}
 .proj.done{border-style:solid;border-color:var(--accent);color:var(--fg);text-decoration:none}
 .proj.done b{color:var(--accent)}
@@ -74,22 +78,25 @@ footer{font-family:var(--mono);font-size:12px;color:var(--muted)}
     <h2>Стек <span class="tag">подсвечено то, что качаю сейчас</span></h2>
     <div class="chips">
       <span class="chip on">Python</span>
-      <span class="chip on">LLM API</span>
       <span class="chip on">HTML / CSS</span>
-      <span class="chip">JavaScript</span>
+      <span class="chip on">JavaScript</span>
       <span class="chip on">Telegram-боты</span>
+      <span class="chip">LLM API</span>
+      <span class="chip">FastAPI</span>
+      <span class="chip">scikit-learn · NLP</span>
       <span class="chip">SQLite</span>
-      <span class="chip">Git</span>
+      <span class="chip">Figma</span>
+      <span class="chip">Git · GitHub Pages</span>
     </div>
   </section>
 
   <section>
-    <h2>Проекты <span class="tag">4 проекта · ии, боты, сайты</span></h2>
+    <h2>Проекты <span class="tag">4 проекта · сначала новые</span></h2>
     <div class="projects">
-      <a class="proj done" href="https://ai-reviews-platform.onrender.com" target="_blank" rel="noopener"><img class="shot" src="img/ai-market.jpg" alt="AI Market: разбор отзыва по аспектам и чат AI-консультанта" loading="lazy"><span class="tag">проект 03 · python, nlp</span><b>AI Market ↗</b><small>AI-консультант магазина: разбирает отзывы по аспектам (камера, батарея, нагрев) и отвечает на вопросы покупателей по ним. FastAPI, scikit-learn, RuBERT. Первая загрузка до минуты.</small></a>
-      <a class="proj done" href="https://github.com/moraxxvi/barber-bot" target="_blank" rel="noopener"><span class="tag">проект 01 · python</span><b>Barber Bot ↗</b><small>Telegram-бот для записи в барбершоп: услуги, свободное время, номер в один тап, уведомления владельцу. aiogram, SQLite.</small></a>
-      <a class="proj done" href="https://moraxxvi.github.io/brass-and-blade/" target="_blank" rel="noopener"><img class="shot" src="img/brass-and-blade.jpg" alt="Главный экран сайта Brass &amp; Blade" loading="lazy"><span class="tag">проект 02 · html/css</span><b>Brass &amp; Blade ↗</b><small>Лендинг + бот онлайн-записи для барбершопа. Демо-проект: услуги и цены, мастера, отзывы, карта 2ГИС, запись через Telegram.</small></a>
       <a class="proj done" href="https://moraxxvi.github.io/chill-and-brew/" target="_blank" rel="noopener"><img class="shot" src="img/chill-and-brew.jpg" alt="Главный экран сайта кофейни Chill &amp; Brew" loading="lazy"><span class="tag">проект 04 · html/css/js</span><b>Chill &amp; Brew ↗</b><small>Сайт кофейни по моему макету из Figma: меню с вкладками, предзаказ навынос, доставка через Wolt и Glovo, статус «открыто» по времени Алматы.</small></a>
+      <a class="proj done" href="https://ai-reviews-platform.onrender.com" target="_blank" rel="noopener"><img class="shot" src="img/ai-market.jpg" alt="AI Market: разбор отзыва по аспектам и чат AI-консультанта" loading="lazy"><span class="tag">проект 03 · python, nlp</span><b>AI Market ↗</b><small>AI-консультант магазина: разбирает отзывы по аспектам (камера, батарея, нагрев) и отвечает на вопросы покупателей по ним. FastAPI, scikit-learn, RuBERT. Первая загрузка до минуты.</small></a>
+      <a class="proj done" href="https://moraxxvi.github.io/brass-and-blade/" target="_blank" rel="noopener"><img class="shot" src="img/brass-and-blade.jpg" alt="Главный экран сайта Brass &amp; Blade" loading="lazy"><span class="tag">проект 02 · html/css</span><b>Brass &amp; Blade ↗</b><small>Лендинг + бот онлайн-записи для барбершопа. Демо-проект: услуги и цены, мастера, отзывы, карта 2ГИС, запись через Telegram.</small></a>
+      <a class="proj done" href="https://github.com/moraxxvi/barber-bot" target="_blank" rel="noopener"><div class="shot chat" aria-hidden="true"><span class="bub in">Записаться на стрижку</span><span class="bub out">Выберите мастера: Арман · Данияр</span><span class="bub in">Арман, завтра 15:00</span><span class="bub out">Готово ✓ Напомню за час до визита</span></div><span class="tag">проект 01 · python</span><b>Barber Bot ↗</b><small>Telegram-бот для записи в барбершоп: услуги, свободное время, номер в один тап, уведомления владельцу. aiogram, SQLite.</small></a>
     </div>
   </section>
 
