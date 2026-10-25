@@ -31,7 +31,7 @@ p{margin:0;max-width:62ch}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chip{font-family:var(--mono);font-size:13px;padding:6px 12px;border-radius:6px;background:var(--surface);border:1px solid var(--line)}
 .chip.on{border-color:var(--accent);color:var(--accent)}
-.projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
 .proj{background:var(--surface);border:1px dashed var(--line);border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:8px;min-width:0}
 .proj b{font-weight:600}
 .proj small{color:var(--muted);font-size:14px}
@@ -59,7 +59,7 @@ footer{font-family:var(--mono);font-size:12px;color:var(--muted)}
 
 <div class="wrap">
   <header>
-    <span class="ver"><span class="dot"></span>v0.4.0 · в разработке</span>
+    <span class="ver"><span class="dot"></span>v0.5.0 · в разработке</span>
     <span class="tag" style="display:block;margin-top:18px">@moraxx</span>
     <h1 style="margin-top:6px">Мансур.<br><em>Строю</em> продукты с ИИ.</h1>
     <p class="lead">Вайбовый айтишник. Делаю штуки, которыми пользуются люди. <span>Пока только начинаю, и это лог того, как я расту.</span></p>
@@ -84,18 +84,20 @@ footer{font-family:var(--mono);font-size:12px;color:var(--muted)}
   </section>
 
   <section>
-    <h2>Проекты <span class="tag">3 проекта · ии, боты, сайты</span></h2>
+    <h2>Проекты <span class="tag">4 проекта · ии, боты, сайты</span></h2>
     <div class="projects">
       <a class="proj done" href="https://ai-reviews-platform.onrender.com" target="_blank" rel="noopener"><img class="shot" src="img/ai-market.jpg" alt="AI Market: разбор отзыва по аспектам и чат AI-консультанта" loading="lazy"><span class="tag">проект 03 · python, nlp</span><b>AI Market ↗</b><small>AI-консультант магазина: разбирает отзывы по аспектам (камера, батарея, нагрев) и отвечает на вопросы покупателей по ним. FastAPI, scikit-learn, RuBERT. Первая загрузка до минуты.</small></a>
       <a class="proj done" href="https://github.com/moraxxvi/barber-bot" target="_blank" rel="noopener"><span class="tag">проект 01 · python</span><b>Barber Bot ↗</b><small>Telegram-бот для записи в барбершоп: услуги, свободное время, номер в один тап, уведомления владельцу. aiogram, SQLite.</small></a>
       <a class="proj done" href="https://moraxxvi.github.io/brass-and-blade/" target="_blank" rel="noopener"><img class="shot" src="img/brass-and-blade.jpg" alt="Главный экран сайта Brass &amp; Blade" loading="lazy"><span class="tag">проект 02 · html/css</span><b>Brass &amp; Blade ↗</b><small>Лендинг + бот онлайн-записи для барбершопа. Демо-проект: услуги и цены, мастера, отзывы, карта 2ГИС, запись через Telegram.</small></a>
+      <a class="proj done" href="https://moraxxvi.github.io/chill-and-brew/" target="_blank" rel="noopener"><img class="shot" src="img/chill-and-brew.jpg" alt="Главный экран сайта кофейни Chill &amp; Brew" loading="lazy"><span class="tag">проект 04 · html/css/js</span><b>Chill &amp; Brew ↗</b><small>Сайт кофейни по моему макету из Figma: меню с вкладками, предзаказ навынос, доставка через Wolt и Glovo, статус «открыто» по времени Алматы.</small></a>
     </div>
   </section>
 
   <section>
     <h2>Changelog <span class="tag">история версий</span></h2>
     <ol class="log">
-      <li class="now"><span class="v">v0.4.0</span><span class="d">25.10.2026</span><p>AI-консультант интернет-магазина на NLP: анализ отзывов и чат по ним.</p></li>
+      <li class="now"><span class="v">v0.5.0</span><span class="d">26.10.2026</span><p>Сайт кофейни Chill &amp; Brew по моему макету из Figma: меню, предзаказ, доставка через агрегаторы.</p></li>
+      <li><span class="v">v0.4.0</span><span class="d">25.10.2026</span><p>AI-консультант интернет-магазина на NLP: анализ отзывов и чат по ним.</p></li>
       <li><span class="v">v0.3.0</span><span class="d">23.10.2026</span><p>Первый сайт: лендинг для барбершопа, связанный с ботом записи.</p></li>
       <li><span class="v">v0.2.0</span><span class="d">21.10.2026</span><p>Первый проект: Telegram-бот для записи клиентов.</p></li>
       <li><span class="v">v0.1.0</span><span class="d">17.10.2026</span><p>Запустил свою первую страницу.</p></li>
@@ -111,6 +113,6 @@ footer{font-family:var(--mono);font-size:12px;color:var(--muted)}
     </div>
   </section>
 
-  <footer>build 004 · сделано вместе с Claude</footer>
+  <footer>build 005 · сделано вместе с Claude</footer>
 </div>
 </body></html>
