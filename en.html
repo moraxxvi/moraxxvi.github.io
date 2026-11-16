@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mansur Berikuly — portfolio and résumé</title>
+  <meta name="description" content="Mansur Berikuly's portfolio: websites built from his own Figma designs, Telegram bots, and tools for study and work.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=Unbounded:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <!-- тема подставляется сразу, чтобы страница не мигала при загрузке -->
+  <script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+</head>
+<body>
+
+  <!-- Английская версия страницы. Русская — index.html. Тексты в двух файлах нужно менять вместе. -->
+  <header class="top">
+    <a class="top-name" href="#start">Mansur Berikuly</a>
+    <nav class="top-nav" aria-label="Sections">
+      <a href="#projects">Projects</a>
+      <a href="#resume">Résumé</a>
+      <a href="#contact">Contact</a>
+      <button class="theme" type="button" aria-label="Switch theme" data-light="Light" data-dark="Dark">Dark</button>
+      <a class="lang" href="index.html" lang="ru">RU</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="hero" id="start">
+      <h1>Mansur Berikuly</h1>
+      <p class="hero-lead">
+        Based in Almaty. I work in customer support at Wolt and I'm a third-year
+        Information Systems student at Turan University. I build websites and tools
+        that people actually use: I design in Figma, write code together with an AI assistant,
+        and make sure I understand how it works.
+      </p>
+    </section>
+
+    <section class="projects" id="projects">
+      <div class="wrap"><h2 class="section-title">Projects</h2></div>
+
+      <article class="work band-unik">
+        <div class="work-in">
+        <div class="work-shot">
+          <span class="bar" aria-hidden="true"><i></i><i></i><i></i><u>moy-unik</u></span>
+          <img src="img/moy-unik.jpg" alt="The Moy Unik page with sample data: next deadline, assignment list, grades and GPA" width="1600" height="1000">
+        </div>
+        <div class="work-text">
+          <h3>Moy Unik <span class="tag">tool</span></h3>
+          <p class="work-kind">A student dashboard on top of Canvas</p>
+          <p class="work-why"><b>Problem.</b> Canvas is awkward in small ways. Just to check a grade you have to open the course, find the grades section in the menu, scroll to the bottom and work out the total yourself. Deadlines are the same: the urgent assignment is buried among dozens of others.</p>
+          <p>
+            A page for Turan University students that puts everything on one screen:
+            what is due and when, current grades, whether you have enough points to be admitted
+            to exams, and your GPA. It includes a “how much do I need on the exam” calculator
+            and Telegram reminders. Works on desktop and phone.
+          </p>
+          <p class="work-stack">Google Apps Script, JavaScript, Canvas API</p>
+          <p class="work-stack">Sign-in requires a university email; the screenshot shows sample data. The interface is in Russian.</p>
+          <p class="work-links">
+            <a href="https://github.com/moraxxvi/moy-unik" target="_blank" rel="noopener">Code on GitHub</a>
+          </p>
+        </div>
+      </div>
+      </article>
+
+      <article class="work band-coffee">
+        <div class="work-in">
+        <a class="work-shot" href="https://moraxxvi.github.io/chill-and-brew/" target="_blank" rel="noopener">
+          <span class="bar" aria-hidden="true"><i></i><i></i><i></i><u>moraxxvi.github.io/chill-and-brew</u></span>
+          <img src="img/chill-and-brew.jpg" alt="Home screen of the Chill & Brew coffee shop website" width="1600" height="1000" loading="lazy">
+        </a>
+        <div class="work-text">
+          <h3>Chill & Brew <span class="tag">website</span></h3>
+          <p class="work-kind">Coffee shop website</p>
+          <p class="work-why"><b>Problem.</b> Small coffee shops often get orders only through delivery apps and depend entirely on their rules. A site of their own, with a menu and pickup pre-orders, gives the shop a direct line to its guests that belongs to the shop itself.</p>
+          <p>
+            A landing page for a fictional coffee shop in Almaty. The menu switches by tabs,
+            customers can pre-order for pickup, and the “open / closed” status follows Almaty time.
+            Built from my own Figma design.
+          </p>
+          <p class="work-stack">HTML, CSS, JavaScript — no frameworks</p>
+          <p class="work-links">
+            <a href="https://moraxxvi.github.io/chill-and-brew/" target="_blank" rel="noopener">Open the site</a>
+            <a href="https://github.com/moraxxvi/chill-and-brew" target="_blank" rel="noopener">Code on GitHub</a>
+          </p>
+        </div>
+      </div>
+      </article>
+
+      <article class="work band-thai">
+        <div class="work-in">
+        <a class="work-shot" href="https://moraxxvi.github.io/travel-to-thailand-/" target="_blank" rel="noopener">
+          <span class="bar" aria-hidden="true"><i></i><i></i><i></i><u>moraxxvi.github.io/travel-to-thailand-</u></span>
+          <img src="img/thailand.jpg" alt="Home screen of the Tropical Horizons travel agency website" width="1600" height="1000" loading="lazy">
+        </a>
+        <div class="work-text">
+          <h3>Tropical Horizons <span class="tag">website</span></h3>
+          <p class="work-kind">Travel agency website</p>
+          <p class="work-why"><b>Problem.</b> A travel agency can have a beautiful Instagram full of fresh stories, yet it is still hard to tell the main thing from it: what the tour includes and how it goes. The site answers those questions in order and in plain words.</p>
+          <p>
+            A landing page for a Thailand tour, built from my own Figma design. The 8-day
+            programme is laid out step by step, with a booking window, customer reviews
+            and a gallery with full-screen photos.
+          </p>
+          <p class="work-stack">HTML, CSS, JavaScript — no frameworks</p>
+          <p class="work-links">
+            <a href="https://moraxxvi.github.io/travel-to-thailand-/" target="_blank" rel="noopener">Open the site</a>
+          </p>
+        </div>
+      </div>
+      </article>
+
+      <article class="work band-ai">
+        <div class="work-in">
+        <a class="work-shot" href="https://ai-reviews-platform.onrender.com" target="_blank" rel="noopener">
+          <span class="bar" aria-hidden="true"><i></i><i></i><i></i><u>ai-reviews-platform.onrender.com</u></span>
+          <img src="img/ai-market.jpg" alt="AI Market home page: analysis of customer reviews" width="1600" height="1000" loading="lazy">
+        </a>
+        <div class="work-text">
+          <h3>AI Market <span class="tag">university project</span></h3>
+          <p class="work-kind">AI assistant for an online store</p>
+          <p class="work-why"><b>Problem.</b> For someone who isn't into tech, choosing a product is hard: there are thousands of reviews, and online video reviews contradict each other. The service reads real customers' reviews for them and shows what matters — what the product does well and what people complain about.</p>
+          <p>
+            A university project at Turan University. The program sorts customer reviews
+            by topic — camera, battery, heating — and detects whether each is praised or criticised.
+            A chat answers questions about the product based on those reviews.
+          </p>
+          <p class="work-stack">Python, FastAPI, scikit-learn</p>
+          <p class="work-links">
+            <a href="https://ai-reviews-platform.onrender.com" target="_blank" rel="noopener">Open the site</a>
+            <a href="https://github.com/moraxxvi/ai-reviews-platform" target="_blank" rel="noopener">Code on GitHub</a>
+          </p>
+          <p class="work-stack">The first load can take up to a minute. The interface is in Russian.</p>
+        </div>
+      </div>
+      </article>
+
+      <article class="work band-barber">
+        <div class="work-in">
+        <a class="work-shot" href="https://moraxxvi.github.io/brass-and-blade/" target="_blank" rel="noopener">
+          <span class="bar" aria-hidden="true"><i></i><i></i><i></i><u>moraxxvi.github.io/brass-and-blade</u></span>
+          <img src="img/brass-and-blade.jpg" alt="Home screen of the Brass & Blade barbershop website" width="1600" height="1000" loading="lazy">
+        </a>
+        <div class="work-text">
+          <h3>Brass & Blade <span class="tag">website</span></h3>
+          <p class="work-kind">Barbershop website</p>
+          <p class="work-why"><b>Problem.</b> Online booking services are convenient, but there a barbershop is just one line among its competitors. Its own site with booking through a Telegram bot lets the shop show its barbers, win the customer over and stay independent of someone else's platform.</p>
+          <p>
+            A one-page site for a fictional barbershop in Almaty: services and prices,
+            barbers, reviews, and booking through a Telegram bot that I also wrote.
+          </p>
+          <p class="work-stack">HTML, CSS</p>
+          <p class="work-links">
+            <a href="https://moraxxvi.github.io/brass-and-blade/" target="_blank" rel="noopener">Open the site</a>
+          </p>
+        </div>
+      </div>
+      </article>
+
+      <div class="wrap">
+      <ul class="more">
+        <li>
+          <h3>Barber Bot <span class="tag">bot</span></h3>
+          <p>
+            A Telegram bot for barbershop bookings: the customer picks a service, a barber and a time,
+            the bot sends a reminder before the visit, and the owner gets a notification.
+          </p>
+          <p class="work-stack">Python, aiogram, SQLite</p>
+          <p class="work-links">
+            <a href="https://github.com/moraxxvi/barber-bot" target="_blank" rel="noopener">Code on GitHub</a>
+          </p>
+        </li>
+      </ul>
+      </div>
+    </section>
+
+    <section class="cv" id="resume">
+      <div class="cv-head">
+        <h2 class="section-title">Résumé</h2>
+        <a class="cv-download" href="Mansur-Berikuly-CV-EN.pdf" download>Download résumé as PDF</a>
+      </div>
+
+      <p class="cv-name">Almaty, Kazakhstan</p>
+
+      <h3 class="cv-part">Experience</h3>
+
+      <article class="job">
+        <p class="job-when">April 2025 — present</p>
+        <div>
+          <h4>Support Associate</h4>
+          <p class="job-where">Wolt, Almaty</p>
+          <ul>
+            <li>Support customers, courier partners and merchants via chat, email and phone: order delays and cancellations, refunds, compensations, payment issues.</li>
+            <li>Handle high-priority and escalated cases together with team leads, technical and operations teams.</li>
+            <li>Work to SLA and KPI standards: first response time, CSAT, quality.</li>
+            <li>Help new team members with onboarding and difficult cases.</li>
+            <li>Built an internal tool for the team in Google Apps Script.</li>
+            <li>Started as Junior Support Associate (April — June 2025) and became Support Associate after the probation period.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="job">
+        <p class="job-when">October 2025 — present</p>
+        <div>
+          <h4>Back-end development, self-study</h4>
+          <p class="job-where">Independent</p>
+          <ul>
+            <li>Studied Node.js, Express.js, MongoDB and Mongoose hands-on.</li>
+            <li>Built REST APIs with filtering, sorting, pagination and full CRUD.</li>
+            <li>Set up authentication and authorization, password reset, encryption and rate limiting.</li>
+            <li>Integrated Stripe payments, email and file uploads, deployed applications, used Git for version control.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="job">
+        <p class="job-when">November 2024 — March 2025</p>
+        <div>
+          <h4>Junior Web Designer</h4>
+          <p class="job-where">Freelance, Self-Employed</p>
+          <ul>
+            <li>Designed website and mobile app interfaces in Figma and Canva: wireframes, layouts, interactive prototypes.</li>
+            <li>Went through the full process from concept and user flow to final visual design, mobile-first.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="job">
+        <p class="job-when">March 2024 — October 2024</p>
+        <div>
+          <h4>Warehouse Supervisor</h4>
+          <p class="job-where">TOO GPM, Almaty</p>
+          <ul>
+            <li>Ran the warehouse and a team of 20 people: receipt, storage and dispatch of inventory.</li>
+            <li>Designed and introduced a tracking system for inventory movements, which reduced discrepancies and stock shortages.</li>
+            <li>Audited regional warehouses in Bishkek and southern Kazakhstan.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="job">
+        <p class="job-when">January 2024 — March 2024</p>
+        <div>
+          <h4>1C Specialist</h4>
+          <p class="job-where">TOO GPM, Almaty</p>
+          <ul>
+            <li>Advised clients on spare parts, handled stock deduction and invoicing in 1C.</li>
+            <li>Simplified stock deduction and invoicing, removing duplicate entries and manual reconciliations.</li>
+          </ul>
+        </div>
+      </article>
+
+      <h3 class="cv-part">Education</h3>
+
+      <article class="job">
+        <p class="job-when">since 2024</p>
+        <div>
+          <h4>Turan University</h4>
+          <p class="job-where">Bachelor's degree, Information Systems</p>
+        </div>
+      </article>
+
+      <article class="job">
+        <p class="job-when">September 2021 — July 2024</p>
+        <div>
+          <h4>Narxoz University College of Economics</h4>
+          <p class="job-where">College diploma, Information Systems</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="skills" id="skills">
+      <h2 class="section-title">What I work with</h2>
+      <dl class="skills-list">
+        <div>
+          <dt>Design</dt>
+          <dd>Figma: layouts, colour, type, spacing. I design first, then build.</dd>
+        </div>
+        <div>
+          <dt>Websites</dt>
+          <dd>HTML, CSS, JavaScript. Responsive layouts for phone, tablet and desktop.</dd>
+        </div>
+        <div>
+          <dt>Tools</dt>
+          <dd>Python: Telegram bots and FastAPI. Studied Node.js, Express and MongoDB. Google Apps Script for work tasks.</dd>
+        </div>
+        <div>
+          <dt>Working with AI</dt>
+          <dd>I use Claude in development: I set the tasks, review and test the result, and understand the code before shipping it.</dd>
+        </div>
+        <div>
+          <dt>Support background</dt>
+          <dd>I see where things are inconvenient for people and can explain complex things in plain words.</dd>
+        </div>
+        <div>
+          <dt>Languages</dt>
+          <dd>Kazakh — native, Russian — fluent, English — professional working proficiency.</dd>
+        </div>
+        <div>
+          <dt>Certificates</dt>
+          <dd>Introduction to Web Development with HTML, CSS, JavaScript. Building Web Applications in PHP. AI For Everyone. Basic Robotic Behaviors and Odometry.</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="contact" id="contact">
+      <h2>Contact</h2>
+      <p>Open to offers in development: websites, bots, internal tools. Message me and I'll tell you more.</p>
+      <p class="contact-links">
+        <a class="button" href="https://t.me/mnsbrk" target="_blank" rel="noopener">Message on Telegram</a>
+        <a class="button button-quiet" href="https://github.com/moraxxvi" target="_blank" rel="noopener">GitHub: moraxxvi</a>
+        <a class="button button-quiet" href="https://www.linkedin.com/in/mansur-berikuly-136a613a4/" target="_blank" rel="noopener">LinkedIn</a>
+      </p>
+    </section>
+
+  </main>
+
+  <footer class="foot">
+    <p>Mansur Berikuly, 2026</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

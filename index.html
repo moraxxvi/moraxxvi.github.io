@@ -1,177 +1,334 @@
-<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Мансур · moraxx</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;800&family=Onest:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
-<style>
-/* Layout: one narrow column read like a release log — hero as "version", sections as commits */
-:root{
-  --bg:#0f1218; --surface:#171b24; --line:#262c38;
-  --fg:#e9e6df; --muted:#8f97a6; --accent:#f2a33a; --accent-ink:#1a1206; --ok:#5fc48f;
-  --display:"Unbounded",system-ui,sans-serif;
-  --body:"Onest",system-ui,-apple-system,sans-serif;
-  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
-  color-scheme:dark;
-}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.6;
-  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.wrap{max-width:720px;margin:0 auto;padding-block:56px 72px;display:flex;flex-direction:column;gap:56px}
-.tag{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.ver{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:13px;color:var(--accent);
-  border:1px solid var(--line);border-radius:999px;padding:4px 12px}
-.dot{width:8px;height:8px;border-radius:50%;background:var(--ok);animation:pulse 2s infinite}
-@keyframes pulse{50%{opacity:.35}}
-h1{font-family:var(--display);font-weight:800;font-size:clamp(36px,9vw,64px);line-height:1.02;margin:18px 0 0;text-wrap:balance;letter-spacing:-.01em}
-h1 em{font-style:normal;color:var(--accent)}
-.lead{font-size:19px;color:var(--fg);max-width:34ch;margin:18px 0 0}
-.lead span{color:var(--muted)}
-h2{font-family:var(--display);font-weight:500;font-size:20px;margin:0 0 16px;display:flex;gap:12px;align-items:baseline;text-wrap:balance}
-h2 .tag{font-size:11px}
-p{margin:0;max-width:62ch}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{font-family:var(--mono);font-size:13px;padding:6px 12px;border-radius:6px;background:var(--surface);border:1px solid var(--line)}
-.chip.on{border-color:var(--accent);color:var(--accent)}
-.projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
-.proj{background:var(--surface);border:1px dashed var(--line);border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:8px;min-width:0}
-.proj b{font-weight:600}
-.proj.featured{grid-column:1/-1}
-.proj.featured .shot{aspect-ratio:16/8}
-.proj .shot.chat{display:flex;flex-direction:column;justify-content:center;gap:6px;padding:14px;background:#0e1621;aspect-ratio:16/10;border-radius:6px;border:1px solid var(--line);margin-bottom:4px;overflow:hidden}
-.bub{max-width:80%;padding:6px 10px;border-radius:12px;font-size:12px;line-height:1.3}
-.bub.in{align-self:flex-end;background:#2b5278;color:#fff;border-bottom-right-radius:4px}
-.bub.out{align-self:flex-start;background:#182533;color:#e9e6df;border-bottom-left-radius:4px}
-.proj small{color:var(--muted);font-size:14px}
-.proj.done{border-style:solid;border-color:var(--accent);color:var(--fg);text-decoration:none}
-.proj.done b{color:var(--accent)}
-.proj.done:hover{background:var(--line)}
-.proj.done:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.proj .shot{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;border-radius:6px;border:1px solid var(--line);margin-bottom:4px}
-.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
-.svc{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:10px;min-width:0}
-.svc.best{border-color:var(--accent)}
-.svc .badge{position:absolute;top:-10px;right:14px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;background:var(--accent);color:var(--accent-ink);padding:2px 8px;border-radius:999px}
-.svc b{font-weight:600;font-size:17px}
-.price{font-family:var(--display);font-weight:500;font-size:22px;color:var(--accent);line-height:1.1}
-.price small{display:block;margin-top:4px;font-family:var(--mono);font-size:12px;color:var(--muted);font-weight:400}
-.svc ul{margin:0;padding-left:18px;color:var(--muted);font-size:14px;display:flex;flex-direction:column;gap:4px}
-.svc ul li::marker{color:var(--accent)}
-.svc .ex{font-size:13px;color:var(--muted);margin-top:auto}
-.svc .ex a{color:var(--fg)}
-.svc .go{font-weight:600;color:var(--accent);text-decoration:none;font-size:14px}
-.svc .go:hover{text-decoration:underline}
-.terms{margin-top:14px;color:var(--muted);font-size:14px;display:flex;flex-direction:column;gap:4px}
-.terms b{color:var(--fg);font-weight:500}
-.log{list-style:none;margin:0;padding:0;border-left:1px solid var(--line)}
-.log li{position:relative;padding:0 0 22px 22px}
-.log li::before{content:"";position:absolute;left:-5px;top:8px;width:9px;height:9px;border-radius:50%;background:var(--bg);border:2px solid var(--muted)}
-.log li.now::before{border-color:var(--accent);background:var(--accent)}
-.log .v{font-family:var(--mono);font-size:13px;color:var(--accent)}
-.log .d{font-family:var(--mono);font-size:12px;color:var(--muted);margin-left:8px}
-.log p{color:var(--fg);margin-top:2px}
-.log li:not(.now) p{color:var(--muted)}
-.contact{display:flex;flex-wrap:wrap;gap:10px}
-.btn{font:inherit;font-weight:600;padding:12px 18px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--fg);text-decoration:none;cursor:pointer}
-.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
-.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-footer{font-family:var(--mono);font-size:12px;color:var(--muted)}
-@media (prefers-reduced-motion:reduce){.dot{animation:none}}
-</style>
-</head><body>
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mansur Berikuly — портфолио и резюме</title>
+  <meta name="description" content="Портфолио Мансура: сайты по своим макетам в Figma, Telegram-боты и инструменты для учёбы и работы.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=Unbounded:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <!-- тема подставляется сразу, чтобы страница не мигала при загрузке -->
+  <script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+</head>
+<body>
 
-<div class="wrap">
-  <header>
-    <span class="ver"><span class="dot"></span>v0.7.0 · в разработке</span>
-    <span class="tag" style="display:block;margin-top:18px">@moraxx</span>
-    <h1 style="margin-top:6px">Мансур.<br><em>Строю</em> продукты с ИИ.</h1>
-    <p class="lead">Вайбовый айтишник. Делаю штуки, которыми пользуются люди. <span>Пока только начинаю, и это лог того, как я расту.</span></p>
+  <!-- Шапка: имя и ссылки на разделы страницы -->
+  <header class="top">
+    <a class="top-name" href="#start">Mansur Berikuly</a>
+    <nav class="top-nav" aria-label="Разделы">
+      <a href="#projects">Проекты</a>
+      <a href="#resume">Резюме</a>
+      <a href="#contact">Связаться</a>
+      <button class="theme" type="button" aria-label="Сменить тему" data-light="Светлая" data-dark="Тёмная">Тёмная</button>
+      <a class="lang" href="en.html" lang="en">EN</a>
+    </nav>
   </header>
 
-  <section>
-    <h2>Обо мне <span class="tag">readme</span></h2>
-    <p>Студент 3 курса, Информационные системы, университет Туран, Алматы. Люблю погружаться в одну задачу до конца и видеть результат глазами. Раньше делал игры и пробовал бизнес. Теперь собираю это в одно: продукт, код и ИИ внутри. Цель — сделать инструмент, без которого не обойдётся ни один разработчик.</p>
-  </section>
+  <main>
 
-  <section>
-    <h2>Стек <span class="tag">подсвечено то, что качаю сейчас</span></h2>
-    <div class="chips">
-      <span class="chip on">Python</span>
-      <span class="chip on">HTML / CSS</span>
-      <span class="chip on">JavaScript</span>
-      <span class="chip on">Telegram-боты</span>
-      <span class="chip">LLM API</span>
-      <span class="chip">FastAPI</span>
-      <span class="chip">scikit-learn · NLP</span>
-      <span class="chip">SQLite</span>
-      <span class="chip">Figma</span>
-      <span class="chip">Git · GitHub Pages</span>
-    </div>
-  </section>
+    <!-- Первый экран: имя и пара слов о себе -->
+    <section class="hero" id="start">
+      <h1>Mansur Berikuly</h1>
+      <p class="hero-lead">
+        Живу в Алматы. Работаю в саппорте Wolt и учусь на 3 курсе
+        «Информационных систем» в университете Туран. Делаю сайты и инструменты,
+        которыми пользуются люди: дизайн рисую в Figma, код пишу вместе с ИИ-ассистентом
+        и разбираюсь, как он устроен.
+      </p>
+    </section>
 
-  <section>
-    <h2>Проекты <span class="tag">5 проектов · сначала новые</span></h2>
-    <div class="projects">
-      <a class="proj done featured" href="https://moraxxvi.github.io/travel-to-thailand-/" target="_blank" rel="noopener"><img class="shot" src="img/travel-to-thailand.jpg" alt="Главный экран сайта Tropical Horizons: лодки-лонгтейлы у скал Краби" loading="lazy"><span class="tag">проект 05 · html/css/js</span><b>Tropical Horizons ↗</b><small>Тур-агентство по Таиланду по моему макету и дизайн-системе из Figma: программа тура, по которой плывёт лодка вместе со скроллом, бронирование дат, карусель отзывов, галерея со слайдшоу и закат в футере.</small></a>
-      <a class="proj done" href="https://moraxxvi.github.io/chill-and-brew/" target="_blank" rel="noopener"><img class="shot" src="img/chill-and-brew.jpg" alt="Главный экран сайта кофейни Chill &amp; Brew" loading="lazy"><span class="tag">проект 04 · html/css/js</span><b>Chill &amp; Brew ↗</b><small>Сайт кофейни по моему макету из Figma: меню с вкладками, предзаказ навынос, доставка через Wolt и Glovo, статус «открыто» по времени Алматы.</small></a>
-      <a class="proj done" href="https://ai-reviews-platform.onrender.com" target="_blank" rel="noopener"><img class="shot" src="img/ai-market.jpg" alt="AI Market: разбор отзыва по аспектам и чат AI-консультанта" loading="lazy"><span class="tag">проект 03 · python, nlp</span><b>AI Market ↗</b><small>AI-консультант магазина: разбирает отзывы по аспектам (камера, батарея, нагрев) и отвечает на вопросы покупателей по ним. FastAPI, scikit-learn, RuBERT. Первая загрузка до минуты.</small></a>
-      <a class="proj done" href="https://moraxxvi.github.io/brass-and-blade/" target="_blank" rel="noopener"><img class="shot" src="img/brass-and-blade.jpg" alt="Главный экран сайта Brass &amp; Blade" loading="lazy"><span class="tag">проект 02 · html/css</span><b>Brass &amp; Blade ↗</b><small>Лендинг + бот онлайн-записи для барбершопа. Демо-проект: услуги и цены, мастера, отзывы, карта 2ГИС, запись через Telegram.</small></a>
-      <a class="proj done" href="https://github.com/moraxxvi/barber-bot" target="_blank" rel="noopener"><div class="shot chat" aria-hidden="true"><span class="bub in">Записаться на стрижку</span><span class="bub out">Выберите мастера: Арман · Данияр</span><span class="bub in">Арман, завтра 15:00</span><span class="bub out">Готово ✓ Напомню за час до визита</span></div><span class="tag">проект 01 · python</span><b>Barber Bot ↗</b><small>Telegram-бот для записи в барбершоп: услуги, свободное время, номер в один тап, уведомления владельцу. aiogram, SQLite.</small></a>
-    </div>
-  </section>
+    <!-- Проекты с картинками -->
+    <section class="projects" id="projects">
+      <div class="wrap"><h2 class="section-title">Проекты</h2></div>
 
-  <section id="services">
-    <h2>Услуги и цены <span class="tag">для бизнеса в Алматы</span></h2>
-    <div class="services">
-      <div class="svc">
-        <b>Лендинг</b>
-        <p class="price">от 60 000 ₸ <small>срок: 5–7 дней</small></p>
-        <ul><li>Дизайн под ваше заведение</li><li>Удобно на телефоне</li><li>Меню или услуги, цены, отзывы</li><li>Карта 2ГИС, WhatsApp, Instagram</li></ul>
-        <p class="ex">Пример: <a href="https://moraxxvi.github.io/travel-to-thailand-/" target="_blank" rel="noopener">Tropical Horizons</a>, <a href="https://moraxxvi.github.io/chill-and-brew/" target="_blank" rel="noopener">Chill &amp; Brew</a></p>
-        <a class="go" href="https://t.me/mnsbrk" target="_blank" rel="noopener">Обсудить →</a>
+      <article class="work band-unik">
+        <div class="work-in">
+        <div class="work-shot">
+          <span class="bar" aria-hidden="true"><i></i><i></i><i></i><u>moy-unik</u></span>
+          <img src="img/moy-unik.jpg" alt="Страница «Мой уник» с выдуманными данными: ближайший дедлайн, список заданий, оценки и GPA" width="1600" height="1000">
+        </div>
+        <div class="work-text">
+          <h3>Мой уник <span class="tag">инструмент</span></h3>
+          <p class="work-kind">Своя страница поверх Canvas</p>
+          <p class="work-why"><b>Задача.</b> Canvas неудобен в мелочах. Чтобы просто узнать оценку, нужно открыть предмет, найти в меню раздел с оценками, долистать до конца и самому посчитать итог. С дедлайнами так же: горящее задание приходится выискивать среди десятков других.</p>
+          <p>
+            Страница для студентов университета Туран собирает всё на одном экране:
+            что сдавать и к какому сроку, какие оценки, хватает ли баллов на допуск
+            к сессии и какой выходит GPA. Есть калькулятор «сколько нужно на экзамене»
+            и напоминания в Telegram. Работает на компьютере и телефоне.
+          </p>
+          <p class="work-stack">Google Apps Script, JavaScript, Canvas API</p>
+          <p class="work-stack">Вход только по учебной почте, на скриншоте — выдуманные данные.</p>
+          <p class="work-links">
+            <a href="https://github.com/moraxxvi/moy-unik" target="_blank" rel="noopener">Код на GitHub</a>
+          </p>
+        </div>
       </div>
-      <div class="svc">
-        <b>Telegram-бот для записи</b>
-        <p class="price">от 50 000 ₸ <small>срок: 3–5 дней</small></p>
-        <ul><li>Запись на услугу, мастера и время</li><li>Напоминание клиенту</li><li>Уведомления владельцу</li><li>Без звонков и переписок в директе</li></ul>
-        <p class="ex">Пример: <a href="https://github.com/moraxxvi/barber-bot" target="_blank" rel="noopener">Barber Bot</a></p>
-        <a class="go" href="https://t.me/mnsbrk" target="_blank" rel="noopener">Обсудить →</a>
-      </div>
-      <div class="svc best">
-        <span class="badge">выгоднее</span>
-        <b>Сайт + бот</b>
-        <p class="price">от 100 000 ₸ <small>срок: 7–10 дней</small></p>
-        <ul><li>Лендинг и бот в одном стиле</li><li>Кнопка «Записаться» ведёт в бота</li><li>Клиент находит вас и сразу записывается</li></ul>
-        <p class="ex">Пример: <a href="https://moraxxvi.github.io/brass-and-blade/" target="_blank" rel="noopener">Brass &amp; Blade</a></p>
-        <a class="go" href="https://t.me/mnsbrk" target="_blank" rel="noopener">Обсудить →</a>
-      </div>
-    </div>
-    <div class="terms">
-      <p><b>Правки</b> — бесплатно в течение 2 недель после сдачи.</p>
-      <p><b>Домен</b> — по желанию, оплачивается отдельно по цене регистратора.</p>
-      <p><b>Оплата</b> — 50% на старте, 50% после сдачи.</p>
-    </div>
-  </section>
-  <section>
-    <h2>Changelog <span class="tag">история версий</span></h2>
-    <ol class="log">
-      <li class="now"><span class="v">v0.7.0</span><span class="d">26.10.2026</span><p>Блок «Услуги и цены»: лендинг, бот для записи и пакет «сайт + бот».</p></li>
-      <li><span class="v">v0.6.0</span><span class="d">26.10.2026</span><p>Сайт тур-агентства Tropical Horizons по моему Figma-макету: дизайн-система, анимации на скролле, бронирование.</p></li>
-      <li><span class="v">v0.5.0</span><span class="d">26.10.2026</span><p>Сайт кофейни Chill &amp; Brew по моему макету из Figma: меню, предзаказ, доставка через агрегаторы.</p></li>
-      <li><span class="v">v0.4.0</span><span class="d">25.10.2026</span><p>AI-консультант интернет-магазина на NLP: анализ отзывов и чат по ним.</p></li>
-      <li><span class="v">v0.3.0</span><span class="d">23.10.2026</span><p>Первый сайт: лендинг для барбершопа, связанный с ботом записи.</p></li>
-      <li><span class="v">v0.2.0</span><span class="d">21.10.2026</span><p>Первый проект: Telegram-бот для записи клиентов.</p></li>
-      <li><span class="v">v0.1.0</span><span class="d">17.10.2026</span><p>Запустил свою первую страницу.</p></li>
-      <li><span class="v">v1.0.0</span><span class="d">2027</span><p>Первые коммерческие проекты.</p></li>
-    </ol>
-  </section>
+      </article>
 
-  <section>
-    <h2>Связаться <span class="tag">contact</span></h2>
-    <div class="contact">
-      <a class="btn primary" href="https://t.me/mnsbrk" target="_blank" rel="noopener">Telegram</a>
-      <a class="btn" href="https://github.com/moraxxvi" target="_blank" rel="noopener">GitHub</a>
-    </div>
-  </section>
+      <article class="work band-coffee">
+        <div class="work-in">
+        <a class="work-shot" href="https://moraxxvi.github.io/chill-and-brew/" target="_blank" rel="noopener">
+          <span class="bar" aria-hidden="true"><i></i><i></i><i></i><u>moraxxvi.github.io/chill-and-brew</u></span>
+          <img src="img/chill-and-brew.jpg" alt="Главный экран сайта кофейни Chill & Brew" width="1600" height="1000" loading="lazy">
+        </a>
+        <div class="work-text">
+          <h3>Chill & Brew <span class="tag">сайт</span></h3>
+          <p class="work-kind">Сайт кофейни</p>
+          <p class="work-why"><b>Задача.</b> Небольшие кофейни часто получают заказы только через агрегаторы доставки и полностью зависят от их правил. Собственный сайт с меню и предзаказом навынос даёт кофейне прямой канал связи с гостями, который принадлежит ей самой.</p>
+          <p>
+            Лендинг для вымышленной кофейни в Алматы. Меню переключается по вкладкам,
+            есть предзаказ навынос, а статус «открыто / закрыто» считается по времени Алматы.
+            Дизайн — мой макет в Figma.
+          </p>
+          <p class="work-stack">HTML, CSS, JavaScript — без фреймворков</p>
+          <p class="work-links">
+            <a href="https://moraxxvi.github.io/chill-and-brew/" target="_blank" rel="noopener">Открыть сайт</a>
+            <a href="https://github.com/moraxxvi/chill-and-brew" target="_blank" rel="noopener">Код на GitHub</a>
+          </p>
+        </div>
+      </div>
+      </article>
 
-  <footer>build 007 · сделано вместе с Claude</footer>
-</div>
-</body></html>
+      <article class="work band-thai">
+        <div class="work-in">
+        <a class="work-shot" href="https://moraxxvi.github.io/travel-to-thailand-/" target="_blank" rel="noopener">
+          <span class="bar" aria-hidden="true"><i></i><i></i><i></i><u>moraxxvi.github.io/travel-to-thailand-</u></span>
+          <img src="img/thailand.jpg" alt="Главный экран сайта турагентства Tropical Horizons" width="1600" height="1000" loading="lazy">
+        </a>
+        <div class="work-text">
+          <h3>Tropical Horizons <span class="tag">сайт</span></h3>
+          <p class="work-kind">Сайт турагентства</p>
+          <p class="work-why"><b>Задача.</b> У турагентства может быть красивый Instagram с актуальными сторис, но по нему трудно понять главное: что входит в тур и как он проходит. Сайт отвечает на эти вопросы по порядку и простыми словами.</p>
+          <p>
+            Лендинг тура в Таиланд по моему макету в Figma. Программа на 8 дней расписана
+            по шагам, есть окно бронирования, отзывы клиентов и галерея с просмотром
+            фото во весь экран.
+          </p>
+          <p class="work-stack">HTML, CSS, JavaScript — без фреймворков</p>
+          <p class="work-links">
+            <a href="https://moraxxvi.github.io/travel-to-thailand-/" target="_blank" rel="noopener">Открыть сайт</a>
+          </p>
+        </div>
+      </div>
+      </article>
+
+      <article class="work band-ai">
+        <div class="work-in">
+        <a class="work-shot" href="https://ai-reviews-platform.onrender.com" target="_blank" rel="noopener">
+          <span class="bar" aria-hidden="true"><i></i><i></i><i></i><u>ai-reviews-platform.onrender.com</u></span>
+          <img src="img/ai-market.jpg" alt="Главная страница AI Market: разбор отзывов покупателей" width="1600" height="1000" loading="lazy">
+        </a>
+        <div class="work-text">
+          <h3>AI Market <span class="tag">учебный проект</span></h3>
+          <p class="work-kind">AI-консультант интернет-магазина</p>
+          <p class="work-why"><b>Задача.</b> Человеку, который не разбирается в технике, сложно выбрать товар: отзывов тысячи, а обзоры в интернете противоречат друг другу. Сервис читает отзывы реальных покупателей за него и показывает главное — в чём товар хорош и на что жалуются.</p>
+          <p>
+            Учебный проект в университете Туран. Программа разбирает отзывы покупателей
+            по темам — камера, батарея, нагрев — и определяет, хвалят или ругают.
+            Чат отвечает на вопросы о товаре по этим отзывам.
+          </p>
+          <p class="work-stack">Python, FastAPI, scikit-learn</p>
+          <p class="work-links">
+            <a href="https://ai-reviews-platform.onrender.com" target="_blank" rel="noopener">Открыть сайт</a>
+            <a href="https://github.com/moraxxvi/ai-reviews-platform" target="_blank" rel="noopener">Код на GitHub</a>
+          </p>
+          <p class="work-stack">Первая загрузка может занять до минуты.</p>
+        </div>
+      </div>
+      </article>
+
+      <article class="work band-barber">
+        <div class="work-in">
+        <a class="work-shot" href="https://moraxxvi.github.io/brass-and-blade/" target="_blank" rel="noopener">
+          <span class="bar" aria-hidden="true"><i></i><i></i><i></i><u>moraxxvi.github.io/brass-and-blade</u></span>
+          <img src="img/brass-and-blade.jpg" alt="Главный экран сайта барбершопа Brass & Blade" width="1600" height="1000" loading="lazy">
+        </a>
+        <div class="work-text">
+          <h3>Brass & Blade <span class="tag">сайт</span></h3>
+          <p class="work-kind">Сайт барбершопа</p>
+          <p class="work-why"><b>Задача.</b> Сервисы онлайн-записи удобны, но барбершоп в них — одна строчка среди конкурентов. Свой сайт с записью через Telegram-бота позволяет показать мастеров, расположить к себе клиента и не зависеть от чужой платформы.</p>
+          <p>
+            Одностраничный сайт для вымышленного барбершопа в Алматы: услуги с ценами,
+            мастера, отзывы и запись через Telegram-бота, которого я тоже написал.
+          </p>
+          <p class="work-stack">HTML, CSS</p>
+          <p class="work-links">
+            <a href="https://moraxxvi.github.io/brass-and-blade/" target="_blank" rel="noopener">Открыть сайт</a>
+          </p>
+        </div>
+      </div>
+      </article>
+
+      <!-- Проекты без картинок -->
+      <div class="wrap">
+      <ul class="more">
+        <li>
+          <h3>Barber Bot <span class="tag">бот</span></h3>
+          <p>
+            Telegram-бот для записи в барбершоп: клиент выбирает услугу, мастера и время,
+            бот напоминает о визите, а владелец получает уведомление.
+          </p>
+          <p class="work-stack">Python, aiogram, SQLite</p>
+          <p class="work-links">
+            <a href="https://github.com/moraxxvi/barber-bot" target="_blank" rel="noopener">Код на GitHub</a>
+          </p>
+        </li>
+      </ul>
+      </div>
+    </section>
+
+    <!-- Резюме: опыт работы и образование -->
+    <section class="cv" id="resume">
+      <div class="cv-head">
+        <h2 class="section-title">Резюме</h2>
+        <a class="cv-download" href="Mansur-Berikuly-CV.pdf" download>Скачать резюме в PDF</a>
+      </div>
+
+      <p class="cv-name">Алматы, Казахстан</p>
+
+      <h3 class="cv-part">Опыт работы</h3>
+
+      <article class="job">
+        <p class="job-when">апрель 2025 — сейчас</p>
+        <div>
+          <h4>Support Associate</h4>
+          <p class="job-where">Wolt, Алматы</p>
+          <ul>
+            <li>Помогаю клиентам, курьерам и заведениям в чате, по почте и телефону: задержки и отмены заказов, возвраты, компенсации, оплата.</li>
+            <li>Веду приоритетные и эскалированные случаи вместе с тимлидами, технической и операционной командами.</li>
+            <li>Работаю по стандартам SLA и KPI: время первого ответа, CSAT, качество.</li>
+            <li>Помогаю новичкам с онбордингом и сложными случаями.</li>
+            <li>Сделал для команды внутренний инструмент на Google Apps Script.</li>
+            <li>Начинал как Junior Support Associate (апрель — июнь 2025), после испытательного срока стал Support Associate.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="job">
+        <p class="job-when">октябрь 2025 — сейчас</p>
+        <div>
+          <h4>Backend-разработка, обучение</h4>
+          <p class="job-where">Самостоятельно</p>
+          <ul>
+            <li>Изучал Node.js, Express.js, MongoDB и Mongoose на практике.</li>
+            <li>Делал REST API с фильтрацией, сортировкой, пагинацией и полным CRUD.</li>
+            <li>Настраивал вход и права доступа, сброс пароля, шифрование и ограничение запросов.</li>
+            <li>Подключал оплату Stripe, почту и загрузку файлов, выкладывал приложения, вёл код в Git.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="job">
+        <p class="job-when">ноябрь 2024 — март 2025</p>
+        <div>
+          <h4>Junior Web Designer</h4>
+          <p class="job-where">Freelance, Self-Employed</p>
+          <ul>
+            <li>Рисовал интерфейсы сайтов и мобильных приложений в Figma и Canva: вайрфреймы, макеты, интерактивные прототипы.</li>
+            <li>Проходил весь путь от идеи и сценария пользователя до финального дизайна, сначала под телефон.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="job">
+        <p class="job-when">март 2024 — октябрь 2024</p>
+        <div>
+          <h4>Warehouse Supervisor</h4>
+          <p class="job-where">TOO GPM, Алматы</p>
+          <ul>
+            <li>Руководил складом и командой из 20 человек: приёмка, хранение и отгрузка товара.</li>
+            <li>Придумал и внедрил систему учёта перемещений товара — расхождений и недостач стало меньше.</li>
+            <li>Проверял региональные склады в Бишкеке и на юге Казахстана.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="job">
+        <p class="job-when">январь 2024 — март 2024</p>
+        <div>
+          <h4>1C Specialist</h4>
+          <p class="job-where">TOO GPM, Алматы</p>
+          <ul>
+            <li>Консультировал клиентов по запчастям, вёл списания и накладные в 1С.</li>
+            <li>Упростил списание и выставление накладных — исчезли дубли и ручные сверки.</li>
+          </ul>
+        </div>
+      </article>
+
+      <h3 class="cv-part">Образование</h3>
+
+      <article class="job">
+        <p class="job-when">с 2024</p>
+        <div>
+          <h4>Turan University</h4>
+          <p class="job-where">Бакалавриат, «Информационные системы»</p>
+        </div>
+      </article>
+
+      <article class="job">
+        <p class="job-when">сентябрь 2021 — июль 2024</p>
+        <div>
+          <h4>Экономический колледж Университета Narxoz</h4>
+          <p class="job-where">Диплом колледжа, «Информационные системы»</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- Навыки -->
+    <section class="skills" id="skills">
+      <h2 class="section-title">Чем работаю</h2>
+      <dl class="skills-list">
+        <div>
+          <dt>Дизайн</dt>
+          <dd>Figma: макеты, цвета, шрифты, отступы. Сначала рисую, потом собираю.</dd>
+        </div>
+        <div>
+          <dt>Сайты</dt>
+          <dd>HTML, CSS, JavaScript. Вёрстка под телефон, планшет и компьютер.</dd>
+        </div>
+        <div>
+          <dt>Инструменты</dt>
+          <dd>Python: Telegram-боты и FastAPI. Изучал Node.js, Express и MongoDB. Google Apps Script для рабочих задач.</dd>
+        </div>
+        <div>
+          <dt>Работа с ИИ</dt>
+          <dd>Использую Claude в разработке: ставлю задачи, проверяю и тестирую результат, разбираюсь в коде перед тем, как выкладывать.</dd>
+        </div>
+        <div>
+          <dt>Опыт саппорта</dt>
+          <dd>Понимаю, где людям неудобно, и умею объяснять сложное простыми словами.</dd>
+        </div>
+        <div>
+          <dt>Языки</dt>
+          <dd>Казахский — родной, русский — свободно, английский — рабочий уровень.</dd>
+        </div>
+        <div>
+          <dt>Сертификаты</dt>
+          <dd>Introduction to Web Development with HTML, CSS, JavaScript. Building Web Applications in PHP. AI For Everyone. Basic Robotic Behaviors and Odometry.</dd>
+        </div>
+      </dl>
+    </section>
+
+    <!-- Контакты -->
+    <section class="contact" id="contact">
+      <h2>Связаться</h2>
+      <p>Открыт к предложениям в разработке: сайты, боты, внутренние инструменты. Напишите — расскажу подробнее.</p>
+      <p class="contact-links">
+        <a class="button" href="https://t.me/mnsbrk" target="_blank" rel="noopener">Написать в Telegram</a>
+        <a class="button button-quiet" href="https://github.com/moraxxvi" target="_blank" rel="noopener">GitHub: moraxxvi</a>
+        <a class="button button-quiet" href="https://www.linkedin.com/in/mansur-berikuly-136a613a4/" target="_blank" rel="noopener">LinkedIn</a>
+      </p>
+    </section>
+
+  </main>
+
+  <footer class="foot">
+    <p>Mansur Berikuly, 2026</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

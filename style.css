@@ -1,0 +1,604 @@
+/* ---------- Цвета, шрифты, размеры (меняются в одном месте) ---------- */
+:root {
+  --paper: #F3F5F9;     /* фон страницы */
+  --surface: #FFFFFF;   /* белые плашки */
+  --ink: #14213D;       /* основной текст */
+  --muted: #5E6A80;     /* второстепенный текст */
+  --line: #D5DBE6;      /* тонкие линии */
+  --cobalt: #2B4BFF;    /* главный акцент */
+  --signal: #FFC93C;    /* жёлтый для главной кнопки */
+  --on-ink: #FFFFFF;    /* текст на тёмных кнопках */
+  --on-cobalt: #FFFFFF; /* текст на синем */
+  --contact-bg: #2B4BFF;
+  --foot-bg: #14213D;
+
+  --display: "Unbounded", "Arial Black", sans-serif;
+  --body: "Golos Text", system-ui, sans-serif;
+
+  --edge: clamp(20px, 5vw, 72px);  /* поля по бокам */
+  --wide: 1180px;                  /* максимальная ширина содержимого */
+}
+
+/* ---------- Тёмная тема: те же названия, другие цвета ---------- */
+/* включается сама, если на устройстве тёмная тема, или кнопкой в шапке */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0E1424; --surface: #151D33; --ink: #E8ECF4; --muted: #9AA6BD; --line: #263150;
+    --cobalt: #8EA2FF; --on-ink: #0E1424; --on-cobalt: #0E1424; --contact-bg: #1B2A6B; --foot-bg: #070B16;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0E1424; --surface: #151D33; --ink: #E8ECF4; --muted: #9AA6BD; --line: #263150;
+  --cobalt: #8EA2FF; --on-ink: #0E1424; --on-cobalt: #0E1424; --contact-bg: #1B2A6B; --foot-bg: #070B16;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 18px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+
+a { color: inherit; }
+
+a:focus-visible {
+  outline: 3px solid var(--cobalt);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+h1, h2, h3, p, ol, ul, dl, dd { margin: 0; }
+ol, ul { padding: 0; list-style: none; }
+
+/* ---------- Шапка ---------- */
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  max-width: calc(var(--wide) + var(--edge) * 2);
+  margin: 0 auto;
+  padding: 24px var(--edge);
+}
+
+.top-name {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.top-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px 28px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.top-nav a {
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+}
+
+.top-nav a:hover { border-bottom-color: var(--cobalt); }
+
+/* переключатель языка */
+.top-nav .lang {
+  padding: 2px 10px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.top-nav .lang:hover { background: var(--ink); color: var(--on-ink); border-color: var(--ink); }
+
+/* кнопка «Тёмная / Светлая» */
+.theme {
+  padding: 2px 12px;
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.theme:hover { border-color: var(--ink); }
+.theme:focus-visible { outline: 3px solid var(--cobalt); outline-offset: 3px; }
+
+/* ---------- Общая сетка разделов ---------- */
+main > section {
+  max-width: calc(var(--wide) + var(--edge) * 2);
+  margin: 0 auto;
+  padding-left: var(--edge);
+  padding-right: var(--edge);
+}
+
+.section-title {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(28px, 4vw, 44px);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin-bottom: clamp(32px, 5vw, 64px);
+}
+
+/* ---------- Первый экран ---------- */
+.hero {
+  padding-top: clamp(40px, 8vw, 104px);
+  padding-bottom: clamp(64px, 9vw, 120px);
+}
+
+.hero h1 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(34px, 7.4vw, 100px);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+}
+
+.hero-lead {
+  max-width: 34em;
+  margin-top: clamp(24px, 3vw, 40px);
+  font-size: clamp(18px, 1.6vw, 21px);
+  color: var(--muted);
+}
+
+/* ---------- Проекты ---------- */
+main > .projects {
+  max-width: none;
+  padding: clamp(56px, 7vw, 96px) 0;
+  border-top: 1px solid var(--line);
+}
+
+/* обёртка, которая держит содержимое по центру страницы */
+.wrap {
+  max-width: calc(var(--wide) + var(--edge) * 2);
+  margin: 0 auto;
+  padding: 0 var(--edge);
+}
+
+/* У каждого проекта своя цветная полоса во всю ширину — в цветах самого проекта.
+   Эти цвета одинаковые в светлой и тёмной теме. */
+.work {
+  padding: clamp(48px, 6vw, 88px) 0;
+  background: var(--band-bg);
+  color: var(--band-fg);
+}
+
+.band-unik   { --band-bg: #17181C; --band-fg: #F1F1F3; --band-accent: #6C8CFF; --band-on: #0B1020; }
+.band-coffee { --band-bg: #E9D8C3; --band-fg: #3A1F14; --band-accent: #5A2A1C; --band-on: #FFF6EA; }
+.band-thai   { --band-bg: #12506E; --band-fg: #F4FAFC; --band-accent: #FF8E70; --band-on: #2A0E05; }
+.band-ai     { --band-bg: #14122B; --band-fg: #ECEBFA; --band-accent: #9D8CFF; --band-on: #0F0B2A; }
+.band-barber { --band-bg: #221915; --band-fg: #F0E6D6; --band-accent: #C9A15A; --band-on: #221915; }
+
+.work-in {
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: clamp(24px, 4vw, 64px);
+  align-items: center;
+  max-width: calc(var(--wide) + var(--edge) * 2);
+  margin: 0 auto;
+  padding: 0 var(--edge);
+}
+
+/* каждый второй проект — картинка справа */
+.work:nth-of-type(even) .work-in { grid-template-columns: 5fr 7fr; }
+.work:nth-of-type(even) .work-shot { order: 2; }
+
+/* скриншот в рамке, как окно браузера */
+.work-shot {
+  display: block;
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--band-fg) 22%, transparent);
+  background: color-mix(in srgb, var(--band-fg) 10%, var(--band-bg));
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.55);
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+
+a.work-shot:hover { transform: translateY(-4px); }
+
+/* верхняя полоска окна: три точки и адрес */
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 14px;
+}
+
+.bar i {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--band-fg) 30%, transparent);
+}
+
+.bar u {
+  flex: 1;
+  min-width: 0;
+  margin-left: 10px;
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--band-fg) 12%, transparent);
+  color: color-mix(in srgb, var(--band-fg) 75%, transparent);
+  font-size: 12px;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.work-text h3 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(28px, 3.6vw, 48px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+/* метка рядом с названием: что это за проект */
+.tag {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: var(--band-accent, var(--cobalt));
+  color: var(--band-on, var(--on-cobalt));
+  font-family: var(--body);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.5;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.work-kind {
+  margin-top: 10px;
+  color: var(--band-accent);
+  font-weight: 600;
+}
+
+.work-text > p:not([class]) { margin-top: 18px; }
+
+/* строка «какую задачу решает проект» */
+.work-why {
+  margin-top: 18px;
+  padding-left: 14px;
+  border-left: 3px solid var(--band-accent);
+}
+
+.work-stack {
+  margin-top: 16px;
+  font-size: 16px;
+  color: color-mix(in srgb, var(--band-fg, var(--ink)) 70%, transparent);
+}
+
+.work-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+  font-weight: 600;
+}
+
+/* первая ссылка — заливкой, вторая — контуром */
+.work-links a {
+  padding: 11px 20px;
+  border-radius: 999px;
+  background: var(--band-accent, var(--cobalt));
+  color: var(--band-on, var(--on-cobalt));
+  text-decoration: none;
+}
+
+.work-links a + a {
+  background: transparent;
+  color: var(--band-fg, var(--ink));
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--band-fg, var(--ink)) 45%, transparent);
+}
+
+.work-links a:hover { filter: brightness(1.12); }
+.work a:focus-visible { outline-color: var(--band-accent); }
+
+/* проекты без картинок — тремя колонками */
+.more {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(24px, 3vw, 48px);
+  margin-top: clamp(40px, 5vw, 64px);
+}
+
+.more h3 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 1.3;
+}
+
+.more h3 + p { margin-top: 14px; font-size: 17px; }
+
+/* ---------- Навыки ---------- */
+.skills {
+  padding-top: clamp(56px, 7vw, 96px);
+  padding-bottom: clamp(56px, 7vw, 96px);
+  border-top: 1px solid var(--line);
+}
+
+.skills-list > div {
+  display: grid;
+  grid-template-columns: minmax(160px, 1fr) 3fr;
+  gap: 8px 32px;
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+
+.skills-list > div:last-child { border-bottom: 1px solid var(--line); }
+
+.skills-list dt { font-weight: 600; }
+.skills-list dd { max-width: 38em; color: var(--muted); }
+
+/* ---------- Резюме ---------- */
+.cv {
+  padding-top: clamp(56px, 7vw, 96px);
+  padding-bottom: clamp(56px, 7vw, 96px);
+  border-top: 1px solid var(--line);
+}
+
+.cv-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px 32px;
+  margin-bottom: 24px;
+}
+
+.cv-head .section-title { margin-bottom: 0; }
+
+.cv-download {
+  padding: 12px 22px;
+  background: var(--ink);
+  color: var(--on-ink);
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 999px;
+}
+
+.cv-download:hover { background: var(--cobalt); color: var(--on-cobalt); }
+
+.cv-name { color: var(--muted); }
+
+.cv-part {
+  margin-top: clamp(40px, 5vw, 64px);
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 22px;
+}
+
+.job {
+  display: grid;
+  grid-template-columns: minmax(160px, 1fr) 3fr;
+  gap: 8px 32px;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.job-when { color: var(--muted); font-size: 16px; }
+
+.job h4 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.job-where { color: var(--cobalt); font-weight: 500; }
+
+.job ul {
+  max-width: 40em;
+  margin-top: 12px;
+  padding-left: 20px;
+  list-style: disc;
+  font-size: 17px;
+}
+
+.job li + li { margin-top: 6px; }
+.job li::marker { color: var(--cobalt); }
+
+/* ---------- Контакты ---------- */
+main > .contact {
+  max-width: none;
+  padding-top: clamp(56px, 7vw, 96px);
+  padding-bottom: clamp(56px, 7vw, 96px);
+  background: var(--contact-bg);
+  color: #fff;
+}
+
+.contact > * {
+  max-width: var(--wide);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contact h2 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(28px, 4vw, 44px);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.contact p { margin-top: 24px; font-size: clamp(18px, 1.6vw, 21px); }
+
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 36px;
+}
+
+.button {
+  display: inline-block;
+  padding: 16px 28px;
+  background: var(--signal);
+  color: #14213D;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 999px;
+}
+
+.button:hover { background: #fff; }
+
+/* вторая, более спокойная кнопка */
+.button-quiet {
+  background: transparent;
+  color: #fff;
+  box-shadow: inset 0 0 0 2px #fff;
+}
+
+.button-quiet:hover { color: #14213D; }
+.contact a:focus-visible { outline-color: #fff; }
+
+/* ---------- Подвал ---------- */
+.foot {
+  padding: 24px var(--edge);
+  background: var(--foot-bg);
+  color: #B9C2D6;
+  font-size: 15px;
+}
+
+.foot p { max-width: var(--wide); margin: 0 auto; }
+
+/* ---------- Планшет и телефон ---------- */
+@media (max-width: 860px) {
+  body { font-size: 17px; }
+
+  .work-in,
+  .work:nth-of-type(even) .work-in { grid-template-columns: 1fr; }
+  .work:nth-of-type(even) .work-shot { order: 0; }
+
+  /* на телефоне имя в шапке не нужно: оно крупно стоит сразу под ней */
+  .top-name { display: none; }
+  .top-nav { justify-content: flex-start; }
+
+  .more { grid-template-columns: 1fr; }
+
+  .skills-list > div { grid-template-columns: 1fr; }
+  .job { grid-template-columns: 1fr; }
+}
+
+/* ---------- Если человек отключил анимации в системе ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .work-shot { transition: none; }
+  a.work-shot:hover { transform: none; }
+}
+
+/* ---------- Печать и PDF: страница превращается в обычное резюме ---------- */
+@media print {
+  @page { margin: 14mm; }
+
+  /* PDF всегда светлый, даже если на сайте включена тёмная тема */
+  html:root:not(.x), html:root[data-theme]:not(.x) {
+    --paper: #FFFFFF; --surface: #FFFFFF; --ink: #14213D; --muted: #5E6A80; --line: #D5DBE6;
+    --cobalt: #2B4BFF; --on-ink: #FFFFFF; --on-cobalt: #FFFFFF;
+    color-scheme: light;
+  }
+
+  body { background: #fff; font-size: 10.5pt; line-height: 1.4; }
+
+  .top-nav, .work-shot, .cv-download, .foot { display: none; }
+
+  .top, main > section, .wrap, .work-in { width: 100%; max-width: none; margin: 0; padding-left: 0; padding-right: 0; }
+  .contact > * { max-width: none; margin-left: 0; margin-right: 0; }
+  .no-print { display: none; }
+  .top { padding-top: 0; padding-bottom: 8pt; }
+
+  .hero, .projects, .cv, .skills { padding-top: 12pt; padding-bottom: 12pt; }
+  .hero h1 { font-size: 24pt; }
+  .hero-lead { max-width: none; margin-top: 8pt; font-size: 10.5pt; }
+
+  .section-title { font-size: 15pt; margin-bottom: 10pt; break-after: avoid; }
+  .cv-head { margin-bottom: 4pt; }
+  .cv-part { margin-top: 12pt; font-size: 12pt; }
+
+  /* в PDF резюме идёт первым, проекты — после него */
+  main { display: flex; flex-direction: column; }
+  .hero { order: 1; }
+  .cv { order: 2; }
+  .skills { order: 3; }
+  .projects { order: 4; }
+  main > .contact { order: 5; }
+
+  .job, .skills-list > div {
+    grid-template-columns: 47mm 1fr;
+    gap: 2pt 12pt;
+    margin-top: 8pt;
+    padding: 8pt 0 0;
+  }
+  .skills-list > div { margin-top: 0; padding-bottom: 8pt; }
+  .job, .work, .more li, .skills-list > div { break-inside: avoid; }
+  .job h4 { font-size: 11.5pt; }
+  .job ul { max-width: none; margin-top: 4pt; font-size: 10pt; }
+  .job li + li { margin-top: 2pt; }
+  .job-when, .work-stack { font-size: 9.5pt; }
+  .job-when { white-space: nowrap; }
+
+  .work {
+    padding: 0;
+    background: none;
+    color: var(--ink);
+    --band-fg: var(--ink);
+    --band-accent: var(--cobalt);
+  }
+  .work-in, .work:nth-of-type(even) .work-in { display: block; }
+  .work + .work { margin-top: 12pt; }
+  .tag { margin-left: 4pt; padding: 0; background: none; color: var(--muted); font-size: 9.5pt; font-weight: 400; }
+  .tag::before { content: "· "; }
+  .work-text h3 { font-size: 12pt; }
+  .work-kind, .work-stack, .work-links { margin-top: 2pt; }
+  .work-why { margin-top: 4pt; padding-left: 0; border: 0; }
+  .work-text > p:not([class]) { margin-top: 4pt; }
+  .more { display: block; margin-top: 12pt; padding-top: 0; border: 0; }
+  .more li { margin-top: 12pt; }
+  .more h3 { font-size: 12pt; }
+  .more h3 + p { margin-top: 4pt; font-size: 10.5pt; }
+
+  /* рядом со ссылкой печатается её адрес */
+  .work-links { display: block; font-weight: 400; }
+  .work-links a, .work-links a + a { display: block; padding: 0; background: none; box-shadow: none; color: var(--ink); }
+  .work-links a::after, .contact-links a::after { content: ": " attr(href); color: var(--muted); }
+
+  main > .contact { padding-top: 12pt; padding-bottom: 0; background: none; color: var(--ink); }
+  .contact h2 { font-size: 15pt; }
+  .contact p { margin-top: 6pt; font-size: 10.5pt; }
+  .contact-links { display: block; margin-top: 6pt; }
+  .button, .button-quiet {
+    display: block;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+    color: var(--ink);
+    font-weight: 400;
+  }
+}
