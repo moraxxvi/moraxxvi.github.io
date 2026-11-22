@@ -184,6 +184,7 @@ main > .projects {
 
 .band-unik   { --band-bg: #17181C; --band-fg: #F1F1F3; --band-accent: #6C8CFF; --band-on: #0B1020; }
 .band-coffee { --band-bg: #E9D8C3; --band-fg: #3A1F14; --band-accent: #5A2A1C; --band-on: #FFF6EA; }
+.band-gym    { --band-bg: #16191F; --band-fg: #EEF0F3; --band-accent: #C6F432; --band-on: #111317; }
 .band-thai   { --band-bg: #12506E; --band-fg: #F4FAFC; --band-accent: #FF8E70; --band-on: #2A0E05; }
 .band-ai     { --band-bg: #14122B; --band-fg: #ECEBFA; --band-accent: #9D8CFF; --band-on: #0F0B2A; }
 .band-barber { --band-bg: #221915; --band-fg: #F0E6D6; --band-accent: #C9A15A; --band-on: #221915; }
